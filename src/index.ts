@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import { db } from './db/index';
-import { users, subjects, classes } from './db/schema';
+import { departments, subjects } from './db/schema';
 
 const app: Express = express();
 const PORT = 8000;
@@ -13,13 +13,13 @@ app.get('/', (req: Request, res: Response) => {
   res.json({ message: 'Welcome to the Classroom Management Dashboard API' });
 });
 
-// Example: Get all users
-app.get('/api/users', async (req: Request, res: Response) => {
+// Example: Get all departments
+app.get('/api/departments', async (req: Request, res: Response) => {
   try {
-    const allUsers = await db.select().from(users);
-    res.json(allUsers);
+    const allDepartments = await db.select().from(departments);
+    res.json(allDepartments);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch users' });
+    res.status(500).json({ error: 'Failed to fetch departments' });
   }
 });
 
