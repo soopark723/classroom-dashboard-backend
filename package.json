@@ -17,10 +17,15 @@
   "type": "module",
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
+    "cors": "^2.8.6",
     "dotenv": "^17.2.4",
-    "drizzle-orm": "^0.45.1"
+    "drizzle-orm": "^0.45.1",
+    "express": "^5.2.1"
   },
   "devDependencies": {
-    "drizzle-kit": "^0.31.9"
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "drizzle-kit": "^0.31.9",
+    "tsx": "^4.21.0"
   }
 }
