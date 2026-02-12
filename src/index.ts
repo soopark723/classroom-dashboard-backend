@@ -10,10 +10,10 @@ const app: Express = express();
 const PORT = 8000;
 
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin: process.env.FRONTEND_URL || (process.env.NODE_ENV !== 'production' ? true : false),
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
-}))
+}));
 
 // Middleware
 app.use(express.json());
