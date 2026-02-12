@@ -1,12 +1,24 @@
+import dotenv from "dotenv";
+dotenv.config({ path: ".env.local" });
 import express, { Express, Request, Response } from 'express';
 import { db } from './db/index';
 import { departments, subjects } from './db/schema';
+import subjectsRouter from './routes/subjects';
+import cors from "cors";
 
 const app: Express = express();
 const PORT = 8000;
 
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+}))
+
 // Middleware
 app.use(express.json());
+
+app.use('/api/subjects', subjectsRouter)
 
 // Root GET route
 app.get('/', (req: Request, res: Response) => {
@@ -20,16 +32,6 @@ app.get('/api/departments', async (req: Request, res: Response) => {
     res.json(allDepartments);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch departments' });
-  }
-});
-
-// Example: Get all subjects
-app.get('/api/subjects', async (req: Request, res: Response) => {
-  try {
-    const allSubjects = await db.select().from(subjects);
-    res.json(allSubjects);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch subjects' });
   }
 });
 
